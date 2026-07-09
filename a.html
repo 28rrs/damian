@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinPulse - AI-Driven Budgeting</title>
+    <!-- Tailwind CSS CDN for instant styling without installation -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="navigateTo('home')">
+                <div class="bg-emerald-500 text-slate-900 p-2 rounded-lg font-bold text-xl tracking-wider">FP</div>
+                <span class="text-xl font-bold tracking-tight text-white">Fin<span class="text-emerald-400">Pulse</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <button onclick="navigateTo('home')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Home</button>
+                <button onclick="navigateTo('calculator')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Free Calculator</button>
+                <button onclick="navigateTo('pricing')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Pricing</button>
+                <button onclick="navigateTo('about')" class="nav-link hover:text-emerald-400 transition cursor-pointer">About Us</button>
+                <button onclick="navigateTo('contact')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-12">
+        
+        <!-- PAGE 1: HOME (BRAND IDENTITY) -->
+        <section id="home-page" class="page-view space-y-12 animate-fade-in">
+            <div class="text-center max-w-3xl mx-auto space-y-6 py-12">
+                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full text-sm font-semibold tracking-wide uppercase">Introducing FinPulse</span>
+                <h1 class="text-5xl font-extrabold text-white tracking-tight leading-tight">Smart budgeting meets immediate AI clarity.</h1>
+                <p class="text-xl text-slate-400 leading-relaxed">Take control of your personal economy. FinPulse tracks your income, categorizes your outcomes, and uses intelligent processing to optimize your savings potential.</p>
+                <div class="pt-4 flex justify-center space-x-4">
+                    <button onclick="navigateTo('calculator')" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold px-6 py-3 rounded-xl transition shadow-lg shadow-emerald-500/20 cursor-pointer">Try Free Calculator</button>
+                    <button onclick="navigateTo('pricing')" class="bg-slate-800 hover:bg-slate-700 text-white font-medium px-6 py-3 rounded-xl transition border border-slate-700 cursor-pointer">Explore Premium</button>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 pt-6">
+                <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50">
+                    <div class="text-emerald-400 text-3xl mb-4">📊</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Simplicity First</h3>
+                    <p class="text-slate-400 text-sm">No chaotic spreadsheets. Input your baseline variables and instantly discover your exact financial run-rate.</p>
+                </div>
+                <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50">
+                    <div class="text-emerald-400 text-3xl mb-4">🧠</div>
+                    <h3 class="text-lg font-bold text-white mb-2">AI-Driven Advice</h3>
+                    <p class="text-slate-400 text-sm">Receive immediate, automated strategic pivots based on real percentages, tailored perfectly to your income structure.</p>
+                </div>
+                <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700/50">
+                    <div class="text-emerald-400 text-3xl mb-4">💳</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Pro Sync Ready</h3>
+                    <p class="text-slate-400 text-sm">Designed to scale into live bank feeds and automated receipt extraction pipelines for comprehensive security matching.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: FREE CALCULATOR -->
+        <section id="calculator-page" class="page-view hidden space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-3xl font-bold text-white">Free Budget Intelligence</h2>
+                <p class="text-slate-400">Map out your cash flow and trigger the AI breakdown engine.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Inputs Side -->
+                <div class="lg:col-span-1 bg-slate-800 p-6 rounded-2xl border border-slate-700 space-y-6">
+                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-2">Financial Inputs</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Monthly Income ($)</label>
+                        <input type="number" id="income" value="3200" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition">
+                    </div>
+                    
+                    <div class="space-y-4 pt-2">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Monthly Outcomes ($)</label>
+                        <div>
+                            <span class="text-xs text-slate-500 block mb-1">Food & Groceries</span>
+                            <input type="number" id="expense-food" value="450" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 block mb-1">Taxes & Contributions</span>
+                            <input type="number" id="expense-taxes" value="650" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 block mb-1">Other (Rent, Fun, Utilities)</span>
+                            <input type="number" id="expense-others" value="1200" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateBudget()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold py-3 rounded-xl transition cursor-pointer">Generate AI Advice</button>
+                </div>
+
+                <!-- Analysis/AI Outputs Side -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-500 block mb-1">Total Outcomes</span>
+                            <span id="total-expenses-display" class="text-xl font-bold text-white">$2,300</span>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-500 block mb-1">Net Savings Balance</span>
+                            <span id="net-savings-display" class="text-xl font-bold text-emerald-400">$900</span>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 col-span-2 md:col-span-1">
+                            <span class="text-xs text-slate-500 block mb-1">Savings Rate</span>
+                            <span id="savings-rate-display" class="text-xl font-bold text-blue-400">28.1%</span>
+                        </div>
+                    </div>
+
+                    <!-- AI Insights Box -->
+                    <div class="bg-gradient-to-br from-slate-800 to-slate-850 p-6 rounded-2xl border border-slate-700/60 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl select-none font-bold">AI</div>
+                        <div class="flex items-center space-x-2 text-emerald-400 font-semibold mb-3">
+                            <span>✨</span>
+                            <span class="text-sm uppercase tracking-wider">FinPulse AI Engine Output</span>
+                        </div>
+                        <div id="ai-response-box" class="text-slate-300 space-y-3 text-sm leading-relaxed">
+                            <p>Click "Generate AI Advice" to activate real-time budget parsing algorithms and strategy suggestions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: PRICING -->
+        <section id="pricing-page" class="page-view hidden space-y-8">
+            <div class="text-center max-w-xl mx-auto space-y-2">
+                <h2 class="text-3xl font-bold text-white">Transparent Tiers for Scale</h2>
+                <p class="text-slate-400">Start running your records for free, or lock down fully-automated tracking vectors for your startup project ecosystem.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-6">
+                <!-- Free Plan -->
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col justify-between space-y-6">
+                    <div>
+                        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest block mb-1">Standard Access</span>
+                        <h3 class="text-2xl font-bold text-white">Core Calculator</h3>
+                        <div class="my-4">
+                            <span class="text-4xl font-extrabold text-white">$0</span>
+                            <span class="text-slate-400 text-sm"> / forever</span>
+                        </div>
+                        <p class="text-slate-400 text-sm">Perfect for manually cataloging basic operational revenues and testing strategic savings formulas.</p>
+                        <ul class="space-y-3 pt-6 text-sm text-slate-300">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span>Manual Variable Inputs</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span>Local Automated AI Sandbox Analysis</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span>Unlimited Processing Runs</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="navigateTo('calculator')" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-3 rounded-xl transition cursor-pointer">Launch App</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-slate-800 p-8 rounded-2xl border-2 border-emerald-500 relative flex flex-col justify-between space-y-6 shadow-xl shadow-emerald-500/5">
+                    <span class="absolute top-0 right-6 transform -translate-y-1/2 bg-emerald-500 text-slate-900 text-xs font-extrabold uppercase px-3 py-1 rounded-full tracking-wider">Prototype Mode</span>
+                    <div>
+                        <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest block mb-1">Automated Pro</span>
+                        <h3 class="text-2xl font-bold text-white">Financial Sync</h3>
+                        <div class="my-4">
+                            <span class="text-4xl font-extrabold text-white">$20</span>
+                            <span class="text-slate-400 text-sm"> / month</span>
+                        </div>
+                        <p class="text-slate-400 text-sm">Advanced engine configuration built to securely tap raw bank lines and scan image receipts instantly via cloud storage endpoints.</p>
+                        <ul class="space-y-3 pt-6 text-sm text-slate-300">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span class="font-semibold text-white">Live Credit Card Integration Link</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span class="font-semibold text-white">Automated OCR Digital Receipt Scans</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span>Deep Historical Pattern Mapping</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-emerald-400">✓</span> <span>Direct Export to PDF/CSV Corporate Sheets</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="alert('Prototype Event: In production, this trigger initializes Stripe API checkout protocols to securely bind account payment vectors.')" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold py-3 rounded-xl transition shadow-lg shadow-emerald-500/10 cursor-pointer">Initialize Integration</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: ABOUT US -->
+        <section id="about-page" class="page-view hidden max-w-3xl mx-auto space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-3xl font-bold text-white">The Intelligence Behind FinPulse</h2>
+                <p class="text-slate-400">Redefining fintech prototypes from the ground up.</p>
+            </div>
+            
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 items-center">
+                <div class="w-32 h-32 bg-slate-700 rounded-full flex items-center justify-center text-5xl border-2 border-emerald-400 shadow-md shadow-emerald-400/10 select-none">
+                    👨‍💻
+                </div>
+                <div class="space-y-4 text-center md:text-left flex-1">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Damian Rares</h3>
+                        <span class="text-emerald-400 text-sm font-semibold tracking-wider uppercase">Founder & High School Innovator</span>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        I am a high school student passionate about blending advanced modern engineering concepts with clean architectural design. FinPulse started as a project to strip away the over-complications of traditional budgeting software, replacing them with instantaneous, programmatic insights.
+                    </p>
+                    <p class="text-slate-400 text-xs italic">
+                        "The goal of this project is to prove that basic financial tracking can be made accessible, automated, and hyper-responsive without needing multi-million dollar platforms."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: CONTACT -->
+        <section id="contact-page" class="page-view hidden max-w-xl mx-auto space-y-8">
+            <div class="text-center space-y-2">
+                <h2 class="text-3xl font-bold text-white">Connect with the Firm</h2>
+                <p class="text-slate-400">Have questions about development architecture or features? Drop a line to the pipeline.</p>
+            </div>
+
+            <form onsubmit="handleContactSubmit(event)" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Full Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Email Coordinates</label>
+                    <input type="email" required placeholder="john@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1">Inquiry Description</label>
+                    <textarea rows="4" required placeholder="Write your project feedback or partnership queries here..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition text-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold py-3 rounded-xl transition cursor-pointer">Dispatch Message</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+        <div>&copy; 2026 FinPulse Systems Inc. Built by Damian Rares. All prototype models active.</div>
+    </footer>
+
+    <!-- INTERACTIVE VIEW CONTROLLER & CORE APPLICATION JAVASCRIPT -->
+    <script>
+        // Dynamic Page Switching Logic
+        function navigateTo(pageId) {
+            // Hide all views completely
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            // Reveal requested view
+            document.getElementById(`${pageId}-page`).classList.remove('hidden');
+            // Scroll interface smoothly back to apex coordinates
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Budget Calculations and Dynamic Simulation Engine
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const food = parseFloat(document.getElementById('expense-food').value) || 0;
+            const taxes = parseFloat(document.getElementById('expense-taxes').value) || 0;
+            const others = parseFloat(document.getElementById('expense-others').value) || 0;
+
+            const totalExpenses = food + taxes + others;
+            const netSavings = income - totalExpenses;
+            const savingsRate = income > 0 ? ((netSavings / income) * 100).toFixed(1) : 0;
+
+            // Render numbers onto DOM metrics display points
+            document.getElementById('total-expenses-display').innerText = `$${totalExpenses.toLocaleString()}`;
+            document.getElementById('net-savings-display').innerText = `$${netSavings.toLocaleString()}`;
+            document.getElementById('savings-rate-display').innerText = `${savingsRate}%`;
+
+            // Adjust coloration depending on structural deficit risks
+            if (netSavings < 0) {
+                document.getElementById('net-savings-display').className = "text-xl font-bold text-red-400";
+            } else {
+                document.getElementById('net-savings-display').className = "text-xl font-bold text-emerald-400";
+            }
+
+            // SIMULATED LOCAL REAL-TIME AI INFERENCE ENGINE
+            // If you want to drop standard live Fetch calls to real Open AI or Gemini API lines later, you can swap this space out!
+            let aiText = "";
+            const foodPercentage = ((food / income) * 100).toFixed(1);
+
+            if (netSavings < 0) {
+                aiText = `<p class="text-red-400 font-medium">⚠️ EMERGENCY MARGIN RISK DETECTED</p>
+                          <p>Your current outcomes outpace absolute revenues by <strong>$${Math.abs(netSavings)}</strong>. Your macro footprint requires adjustments. Consider optimizing your variable expenditures immediately to halt capital leakage.</p>`;
+            } else if (savingsRate < 15) {
+                aiText = `<p class="text-yellow-400 font-medium">⚡ COMPRESSION WARNING</p>
+                          <p>Your structural savings velocity stands at <strong>${savingsRate}%</strong>, which falls under defensive thresholds. Because food takes up <strong>${foodPercentage}%</strong> of your gross allocation, optimization routes inside groceries can potentially save you an extra $100-$150 every cycle.</p>`;
+            } else {
+                aiText = `<p class="text-emerald-400 font-semibold">💎 OPTIMAL FISCAL VELOCITY RUNNING</p>
+                          <p>Excellent optimization architecture! A <strong>${savingsRate}%</strong> savings rate signals clear financial runaways. Your primary expense vectors are stable. We suggest taking $${Math.floor(netSavings * 0.4)} of your residual cash flow to allocate to a diversified market tracking asset index.</p>`;
+            }
+
+            document.getElementById('ai-response-box').innerHTML = aiText;
+        }
+
+        // Contact Form Interception
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert("Prototype Notice: Message successfully logged to client memory. In a live production deploy, this event triggers a secure API POST vector straight to your mail relay database.");
+            event.target.reset();
+        }
+
+        // Run baseline calculation on initial loading sweep
+        window.onload = function() {
+            calculateBudget();
+        }
+    </script>
+</body>
+</html>
