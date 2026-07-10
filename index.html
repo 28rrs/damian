@@ -30,44 +30,7 @@
         </div>
     </nav>
 
-     <!-- JAVASCRIPT APPLICATION CORE -->
-    <script>
-        // Core View Router
-        function navigateTo(pageId) {
-            document.querySelectorAll('.page-view').forEach(view => {
-                view.classList.add('hidden');
-            });
-            document.getElementById(`${pageId}-page`).classList.remove('hidden');
-            
-            // Adjust visual states of the navigation links
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.className = "nav-btn hover:text-emerald-400 text-slate-300 transition-all cursor-pointer";
-            });
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Mobile Menu Animation and Toggle Controller
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const path = document.getElementById('menu-icon-path');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                // Morph to a slick "Close" (X) icon path
-                path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-            } else {
-                menu.classList.add('hidden');
-                // Morph back to the clean "Hamburger" menu icon lines
-                path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-            }
-        }
-
-        // Route page and collapse mobile menu drawer instantly
-        function navigateAndClose(pageId) {
-            navigateTo(pageId);
-            toggleMobileMenu();
-        }
-        
+   
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-12">
         
         <!-- PAGE 1: HOME (BRAND IDENTITY) -->
@@ -304,7 +267,41 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Budget Calculations and Dynamic Simulation Engine
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            document.getElementById(`${pageId}-page`).classList.remove('hidden');
+            
+            // Adjust visual states of the navigation links
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn hover:text-emerald-400 text-slate-300 transition-all cursor-pointer";
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Animation and Toggle Controller
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const path = document.getElementById('menu-icon-path');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                // Morph to a slick "Close" (X) icon path
+                path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            } else {
+                menu.classList.add('hidden');
+                // Morph back to the clean "Hamburger" menu icon lines
+                path.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        }
+
+        // Route page and collapse mobile menu drawer instantly
+        function navigateAndClose(pageId) {
+            navigateTo(pageId);
+            toggleMobileMenu();
+        }
+
         function calculateBudget() {
             const income = parseFloat(document.getElementById('income').value) || 0;
             const food = parseFloat(document.getElementById('expense-food').value) || 0;
