@@ -20,6 +20,7 @@
                 <div class="bg-emerald-500 text-slate-900 p-2 rounded-lg font-bold text-xl tracking-wider">SS</div>
                 <span class="text-xl font-bold tracking-tight text-white">Smart<span class="text-emerald-400">Spend</span></span>
             </div>
+            <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8 font-medium">
                 <button onclick="navigateTo('home')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Home</button>
                 <button onclick="navigateTo('calculator')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Free Calculator</button>
@@ -27,10 +28,24 @@
                 <button onclick="navigateTo('about')" class="nav-link hover:text-emerald-400 transition cursor-pointer">About Us</button>
                 <button onclick="navigateTo('contact')" class="nav-link hover:text-emerald-400 transition cursor-pointer">Contact</button>
             </div>
+            <!-- Mobile Menu Button (Visible only on mobile devices) -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none cursor-pointer p-1">
+                <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Navigation Drawer Dropdown (Initially hidden) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-b border-slate-700 px-4 py-3 space-y-1 font-medium">
+            <button onclick="navigateAndClose('home')" class="block w-full text-left py-2.5 px-3 rounded-lg hover:bg-slate-700 hover:text-emerald-400 text-slate-300 transition cursor-pointer">Home</button>
+            <button onclick="navigateAndClose('calculator')" class="block w-full text-left py-2.5 px-3 rounded-lg hover:bg-slate-700 hover:text-emerald-400 text-slate-300 transition cursor-pointer">Free Calculator</button>
+            <button onclick="navigateAndClose('pricing')" class="block w-full text-left py-2.5 px-3 rounded-lg hover:bg-slate-700 hover:text-emerald-400 text-slate-300 transition cursor-pointer">Pricing</button>
+            <button onclick="navigateAndClose('about')" class="block w-full text-left py-2.5 px-3 rounded-lg hover:bg-slate-700 hover:text-emerald-400 text-slate-300 transition cursor-pointer">About Us</button>
+            <button onclick="navigateAndClose('contact')" class="block w-full text-left py-2.5 px-3 rounded-lg hover:bg-slate-700 hover:text-emerald-400 text-slate-300 transition cursor-pointer">Contact</button>
         </div>
     </nav>
 
-   
+    
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-12">
         
         <!-- PAGE 1: HOME (BRAND IDENTITY) -->
@@ -147,7 +162,6 @@
                         <h3 class="text-2xl font-bold text-white">Core Calculator</h3>
                         <div class="my-4">
                             <span class="text-4xl font-extrabold text-white">$0</span>
-                            
                         </div>
                         <p class="text-slate-400 text-sm">Perfect for manually cataloging basic operational revenues and testing strategic savings formulas.</p>
                         <ul class="space-y-3 pt-6 text-sm text-slate-300">
@@ -204,8 +218,8 @@
             </div>
             
             <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 items-center">
-                <div class="w-32 h-32 bg-slate-700 rounded-full flex items-center justify-center text-5xl border-2 border-emerald-400 shadow-md shadow-emerald-400/10 select-none">
-                    <img src="damian.png">
+                <div class="w-32 h-32 bg-slate-700 rounded-full flex items-center justify-center text-5xl border-2 border-emerald-400 shadow-md shadow-emerald-400/10 select-none overflow-hidden">
+                    <img src="damian.png" onerror="this.outerHTML='👨‍💻'">
                 </div>
                 <div class="space-y-4 text-center md:text-left flex-1">
                     <div>
@@ -255,7 +269,7 @@
 
     <!-- INTERACTIVE VIEW CONTROLLER & CORE APPLICATION JAVASCRIPT -->
     <script>
-        // Dynamic Page Switching Logic
+        // Core View Router
         function navigateTo(pageId) {
             // Hide all views completely
             document.querySelectorAll('.page-view').forEach(view => {
@@ -264,20 +278,6 @@
             // Reveal requested view
             document.getElementById(`${pageId}-page`).classList.remove('hidden');
             // Scroll interface smoothly back to apex coordinates
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function navigateTo(pageId) {
-            document.querySelectorAll('.page-view').forEach(view => {
-                view.classList.add('hidden');
-            });
-            document.getElementById(`${pageId}-page`).classList.remove('hidden');
-            
-            // Adjust visual states of the navigation links
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.className = "nav-btn hover:text-emerald-400 text-slate-300 transition-all cursor-pointer";
-            });
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -302,6 +302,7 @@
             toggleMobileMenu();
         }
 
+        // Budget Calculations and Dynamic Simulation Engine
         function calculateBudget() {
             const income = parseFloat(document.getElementById('income').value) || 0;
             const food = parseFloat(document.getElementById('expense-food').value) || 0;
@@ -325,7 +326,6 @@
             }
 
             // SIMULATED LOCAL REAL-TIME AI INFERENCE ENGINE
-            // If you want to drop standard live Fetch calls to real Open AI or Gemini API lines later, you can swap this space out!
             let aiText = "";
             const foodPercentage = ((food / income) * 100).toFixed(1);
 
